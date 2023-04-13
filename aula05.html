@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Minha página de tarefas</title>
+    <style>
+      /* Estilos gerais */
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      h1 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      /* Estilos para as tarefas */
+      .task {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      .task.completed {
+        background-color: #d9d9d9;
+      }
+      .task .title {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .task .description {
+        margin-bottom: 10px;
+      }
+      /* Estilos para os usuários */
+      .user {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      .user.selected {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Minha lista de tarefas</h1>
+    
+    <!-- Seleção de usuário -->
+    <div>
+      <label for="userSelect">Selecione um usuário:</label>
+      <select id="userSelect">
+        <option value="user1">Usuário 1</option>
+        <option value="user2">Usuário 2</option>
+        <option value="user3">Usuário 3</option>
+      </select>
+    </div>
+    
+    <!-- Tarefas do usuário selecionado -->
+    <div id="tasks">
+      <!-- Tarefas do usuário 1 -->
+      <div class="user-tasks" id="user1-tasks">
+        <div class="user">Usuário 1</div>
+        <div class="task">
+          <div class="title">Tarefa 1</div>
+          <div class="description">Descrição da tarefa 1</div>
+        </div>
+        <div class="task completed">
+          <div class="title">Tarefa 2</div>
+          <div class="description">Descrição da tarefa 2</div>
+        </div>
+      </div>
+      
+      <!-- Tarefas do usuário 2 -->
+      <div class="user-tasks" id="user2-tasks" style="display:none">
+        <div class="user">Usuário 2</div>
+        <div class="task">
+          <div class="title">Tarefa 3</div>
+          <div class="description">Descrição da tarefa 3</div>
+        </div>
+        <div class="task">
+          <div class="title">Tarefa 4</div>
+          <div class="description">Descrição da tarefa 4</div>
+        </div>
+      </div>
+      
+      <!-- Tarefas do usuário 3 -->
+      <div class="user-tasks" id="user3-tasks" style="display:none">
+        <div class="user">Usuário 3</div>
+        <div class="task">
+          <div class="title">Tarefa 5</div>
+          <div class="description">Descrição da tarefa 5</div>
+        </div>
+        <div class="task completed">
+          <div class="title">Tarefa 6</div>
+          <div class="description">Descrição da tarefa 6</div>
+        </div>
+        </div>
+        </div>
+        <script>
+          const userSelect = document.querySelector('#userSelect');
+          const userTasks = document.querySelectorAll('.user-tasks');
+          
+          userSelect.addEventListener('change', () => {
+            // esconde todas as tarefas
+            userTasks.forEach(task => {
+              task.style.display = 'none';
+            });
+            
+            // mostra apenas as tarefas do usuário selecionado
+            const selectedUser = userSelect.value;
+            const selectedTasks = document.querySelector(`#${selectedUser}-tasks`);
+            selectedTasks.style.display = 'block';
+            
+            // marca o usuário selecionado
+            const users = document.querySelectorAll('.user');
+            users.forEach(user => {
+              user.classList.remove('selected');
+              if (user.textContent === `Usuário ${selectedUser.split('user')[1]}`) {
+                user.classList.add('selected');
+              }
+            });
+          });
+        </script>
+      </div>
+    </div>
+  </body>
+</html>        
